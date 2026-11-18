@@ -8,7 +8,9 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    # 22.04 rather than -latest: the newest runner image has no prebuilt
+    # Python 3.9, and testing the oldest supported version is the point.
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:

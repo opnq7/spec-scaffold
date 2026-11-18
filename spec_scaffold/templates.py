@@ -14,8 +14,8 @@ REQUIREMENTS = Template(
 
 ## Overview
 
-$IDEA in one paragraph: who has the problem, what they do today, and why that
-is painful. Aim for three sentences.
+Describe $IDEA in one paragraph: who has the problem, what they do today, and
+why that is painful. Aim for three sentences.
 
 ## User Stories
 
