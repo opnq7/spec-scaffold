@@ -1,11 +1,12 @@
 """Tests for the scaffolder itself."""
 
+import json
 from pathlib import Path
 
 import pytest
 
 from spec_scaffold.cli import main, scaffold, slugify
-from spec_scaffold.lint import has_open_task, headings, lint_spec
+from spec_scaffold.lint import as_report, has_open_task, headings, lint_spec
 
 
 @pytest.mark.parametrize(
@@ -108,3 +109,51 @@ def test_main_name_override(tmp_path, monkeypatch):
     assert main(["whatever", "--name", "custom-name"]) == 0
     assert (tmp_path / "specs" / "custom-name" / "design.md").is_file()
     assert not Path(tmp_path / "specs" / "whatever").exists()
+
+
+def test_dry_run_writes_nothing(tmp_path, monkeypatch, capsys):
+    monkeypatch.chdir(tmp_path)
+    assert main(["dark", "mode", "--dry-run"]) == 0
+
+    out = capsys.readouterr().out
+    assert "would" in out
+    assert "dry run" in out
+    assert not (tmp_path / "specs").exists()
+
+
+def test_quiet_success_prints_nothing(tmp_path, monkeypatch, capsys):
+    monkeypatch.chdir(tmp_path)
+    assert main(["dark", "mode", "-q"]) == 0
+    assert capsys.readouterr().out == ""
+
+
+def test_json_check_report(tmp_path, monkeypatch, capsys):
+    target = scaffold("dark mode", out=tmp_path, quiet=True)
+    monkeypatch.chdir(tmp_path)
+
+    assert main(["--check", str(target), "--json"]) == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["ok"] is True
+    assert payload["problems"] == []
+
+    (target / "design.md").unlink()
+    assert main(["--check", str(target), "--json"]) == 1
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["ok"] is False
+    assert "missing design.md" in payload["problems"]
+
+
+def test_json_requires_check(capsys):
+    with pytest.raises(SystemExit) as excinfo:
+        main(["--json"])
+    assert excinfo.value.code == 2
+
+
+def test_as_report_shape(tmp_path):
+    target = scaffold("dark mode", out=tmp_path)
+    assert as_report(target) == {
+        "folder": str(target),
+        "ok": True,
+        "problems": [],
+    }
+

@@ -5,8 +5,10 @@ each one still carries its top-level sections. It is meant to catch "I deleted
 half the template" mistakes, not to judge the quality of the writing.
 """
 
+from __future__ import annotations
+
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable, List
 
 #: Required ``## `` sections per file.
 REQUIRED_SECTIONS = {
@@ -16,7 +18,7 @@ REQUIRED_SECTIONS = {
 }
 
 
-def headings(text: str) -> List[str]:
+def headings(text: str) -> list[str]:
     """Return the titles of all level-2 headings, in document order."""
     found = []
     for line in text.splitlines():
@@ -33,13 +35,13 @@ def has_open_task(text: str) -> bool:
     return any(line.strip().startswith("- [ ]") for line in text.splitlines())
 
 
-def lint_spec(folder: Path) -> List[str]:
+def lint_spec(folder: Path) -> list[str]:
     """Return a list of human-readable problems. Empty list means the spec is OK."""
     folder = Path(folder)
     if not folder.is_dir():
         return [f"{folder} is not a directory"]
 
-    problems: List[str] = []
+    problems: list[str] = []
     for name, required in REQUIRED_SECTIONS.items():
         path = folder / name
         if not path.is_file():
@@ -56,6 +58,12 @@ def lint_spec(folder: Path) -> List[str]:
             problems.append("tasks.md: no '- [ ]' checkboxes left to do")
 
     return problems
+
+
+def as_report(folder: Path) -> dict[str, object]:
+    """Machine-readable form of :func:`lint_spec`, used by ``--json``."""
+    problems = lint_spec(folder)
+    return {"folder": str(folder), "ok": not problems, "problems": problems}
 
 
 def format_problems(folder: Path, problems: Iterable[str]) -> str:

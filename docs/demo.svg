@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="404" viewBox="0 0 820 404" xml:space="preserve" role="img" aria-label="spec-scaffold demo: generating a spec folder and checking it">
+  <defs>
+    <style>
+      .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 13.5px; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 12px; }
+    </style>
+  </defs>
+
+  <rect x="0.5" y="0.5" width="819" height="403" rx="10" fill="#0d1117" stroke="#30363d"/>
+
+  <!-- title bar -->
+  <line x1="0" y1="38" x2="820" y2="38" stroke="#21262d"/>
+  <circle cx="24" cy="19" r="6" fill="#ff5f56"/>
+  <circle cx="44" cy="19" r="6" fill="#ffbd2e"/>
+  <circle cx="64" cy="19" r="6" fill="#27c93f"/>
+  <text class="title" x="410" y="24" fill="#7d8590" text-anchor="middle">spec-scaffold — zsh</text>
+
+  <!-- command 1 -->
+  <text class="mono" x="24" y="74"><tspan fill="#7d8590">~/code $ </tspan><tspan fill="#e6edf3">spec-scaffold "dark mode toggle for a web app"</tspan></text>
+
+  <!-- generated files -->
+  <text class="mono" x="24" y="100"><tspan fill="#3fb950">created  </tspan><tspan fill="#c9d1d9">specs/dark-mode-toggle-for-a-web-app/requirements.md</tspan></text>
+  <text class="mono" x="24" y="122"><tspan fill="#3fb950">created  </tspan><tspan fill="#c9d1d9">specs/dark-mode-toggle-for-a-web-app/design.md</tspan></text>
+  <text class="mono" x="24" y="144"><tspan fill="#3fb950">created  </tspan><tspan fill="#c9d1d9">specs/dark-mode-toggle-for-a-web-app/tasks.md</tspan></text>
+
+  <text class="mono" x="24" y="176" fill="#7d8590">Next: open specs/dark-mode-toggle-for-a-web-app/requirements.md</text>
+
+  <!-- command 2 -->
+  <text class="mono" x="24" y="216"><tspan fill="#7d8590">~/code $ </tspan><tspan fill="#e6edf3">spec-scaffold --check specs/dark-mode-toggle-for-a-web-app</tspan></text>
+  <text class="mono" x="24" y="242"><tspan fill="#3fb950">OK  </tspan><tspan fill="#c9d1d9">specs/dark-mode-toggle-for-a-web-app looks like a complete spec</tspan></text>
+
+  <!-- command 3 -->
+  <text class="mono" x="24" y="282"><tspan fill="#7d8590">~/code $ </tspan><tspan fill="#e6edf3">python -m pytest -q</tspan></text>
+  <text class="mono" x="24" y="308" fill="#8b949e">.........................                                          [100%]</text>
+  <text class="mono" x="24" y="330" fill="#8b949e">25 passed in 0.27s</text>
+
+  <!-- cursor -->
+  <text class="mono" x="24" y="370"><tspan fill="#7d8590">~/code $ </tspan><tspan fill="#e6edf3">▊</tspan></text>
+</svg>
