@@ -122,8 +122,8 @@ $ spec-scaffold --check specs/my-feature --json
 | `design.md` | approach and the rejected alternative, an ASCII architecture sketch, data model table, error handling, testing plan |
 | `tasks.md` | three phases of `- [ ]` checkboxes, ready to tick |
 
-A generated folder is committed under [`examples/`](examples/) so you can read
-one before installing anything.
+A generated folder is committed under [`examples/dark-mode-toggle-for-a-web-app/`](examples/dark-mode-toggle-for-a-web-app/)
+so you can read one before installing anything.
 
 ```markdown
 ## Acceptance Criteria
@@ -133,6 +133,19 @@ Write each criterion as a testable WHEN / THE SYSTEM SHALL pair.
 - **AC-1** — WHEN <trigger>, THE SYSTEM SHALL <observable behaviour>.
 - **AC-2** — WHEN <trigger>, THE SYSTEM SHALL <observable behaviour>.
 ```
+
+## Case study
+
+[`examples/pomodoro-timer/`](examples/pomodoro-timer/) is the other kind of
+example: a **filled-in** spec for a real 577-line single-file Pomodoro timer, one
+of those projects a model writes in one pass and nobody opens again. The spec was
+written against the shipped code on purpose.
+
+[`docs/case-study.md`](docs/case-study.md) reads the two side by side. The short
+version: four acceptance criteria — timing, persistence, skip semantics,
+permission timing — each map to a line of code that looks fine alone and is not,
+and one of them cannot be written down without killing a bug that no amount of
+clicking would reveal.
 
 ## How it works
 

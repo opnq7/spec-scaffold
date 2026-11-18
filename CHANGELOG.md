@@ -6,6 +6,12 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- A hand-written, filled-in spec for a real project:
+  `examples/pomodoro-timer/`, with `docs/case-study.md` reading it against the
+  shipped 577-line file it describes.
+
 ## [0.2.0] - 2026-11-18
 
 ### Added
